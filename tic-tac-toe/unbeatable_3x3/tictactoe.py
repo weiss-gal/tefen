@@ -3,6 +3,7 @@ import random
 
 logfile = open('tictactoe.log', 'wt')
 cache = None
+cache_stats = {'hit': 0, 'miss': 0}
 
 def encode_move(board, human_symbol):
     return ''.join(functools.reduce(lambda x, y: x + y, board, [])) + human_symbol
@@ -14,8 +15,10 @@ def get_cached_result(board, human_symbol):
     
     encoded_move = encode_move(board, human_symbol)
     if encoded_move in cache:
+        cache_stats['hit'] += 1
         return cache[encoded_move]
     
+    cache_stats['miss'] += 1
     return None
     
 def cache_result(board, human_symbol, result):
@@ -98,7 +101,7 @@ def _check_move(board, human_symbol):
     computer_symbol = 'X' if human_symbol == 'O' else 'O'
     is_last_move_human = not is_human_turn(board, human_symbol)
     
-    if board_full(board):
+    if board_full(board) and not is_win(board, human_symbol) and not is_win(board, computer_symbol):
         return 'tie'
 
     if is_last_move_human:
@@ -139,10 +142,9 @@ def check_move(board, human_symbol):
     cache_result(board, human_symbol, result)
     return result
 
-
 def get_computer_move(board, human_symbol):
     next_moves_results = [(move, check_move(board, human_symbol)) for move, board in get_next_moves(board)]
-    
+
     # if there are any winning moves, pick one of them randomly
     winning_moves = [move for move, result in next_moves_results if result == 'win']
     if winning_moves:
@@ -199,6 +201,13 @@ def print_computer_delay():
         time.sleep(0.2)
     print()
 
+# Tic Tac Toe
+# ###########
+
+banner = 'Welcome to Tic Tac Toe!'
+print(banner)
+print('#' * len(banner))
+
 human_symbol = None
 print('Do you want to be X or O?')
 while not human_symbol:
@@ -240,5 +249,7 @@ elif winner:
     print('Computer wins!')
 else:
     print('Tie game!')
+
+log(f'Cache Stats: {cache_stats}')
 
 logfile.close()
