@@ -1,5 +1,5 @@
-def print_numbers(start, stop):
-  for i in range(start - stop):
+def print_numbers(first, last):
+  for i in range(stop - start):
     print(i+start)
     
 print_numbers(1,10)
