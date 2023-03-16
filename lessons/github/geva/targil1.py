@@ -9,8 +9,8 @@
 
 # this function will print all the numbers from 'start' to 'stop'
 # example:
-# print the first number: -1
-# print the last number: 3
+# type the first number: -1
+# type the last number: 3
 # -1
 # 0
 # 1
@@ -21,8 +21,8 @@ def print_nums(start, stop):
     for i in range(start, stop, 1):
         print(i)
 
-start = int(input("print the first number: "))
-stop = int(input("print the last number: "))
+start = int(input("type the first number: "))
+stop = int(input("type the last number: "))
 
 print_nums(start, stop)
 
