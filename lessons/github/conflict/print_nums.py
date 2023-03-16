@@ -8,12 +8,12 @@
 # 2
 # 3
 
-def print_nums(start, stop):
-    for i in range(start, stop, 1):
+def print_nums(first, last):
+    for i in range(first, last, 1):
         print(i)
 
-start = int(input("type the first number: "))
-stop = int(input("type the last number: "))
+first = int(input("type the first number: "))
+last = int(input("type the last number: "))
 
-print_nums(start, stop)
+print_nums(first, last)
 
