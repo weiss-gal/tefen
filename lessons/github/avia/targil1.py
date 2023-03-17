@@ -18,11 +18,11 @@
 # 3
 
 def print_nums(start, stop):
-    for i in range(start, stop, 1):
+    for i in range(start, stop+1, 1):
         print(i)
 
 start = int(input("type the first number: "))
 stop = int(input("type the last number: "))
 
-print_nums(start, stop+1)
+print_nums(start, stop)
 
