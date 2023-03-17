@@ -24,5 +24,5 @@ def print_nums(start, stop):
 start = int(input("type the first number: "))
 stop = int(input("type the last number: "))
 
-print_nums(start, stop)
+print_nums(start, stop+1)
 
