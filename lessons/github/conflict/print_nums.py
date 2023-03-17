@@ -1,3 +1,6 @@
+import random as rnd
+
+
 # this function will print all the numbers from 'start' to 'stop'
 # example:
 # type the first number: -1
