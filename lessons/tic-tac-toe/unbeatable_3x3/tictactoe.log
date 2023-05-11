@@ -1,0 +1,1 @@
+choosing unclosing move [(1, 1)]choosing unclosing move [(0, 1), (1, 0), (1, 2), (2, 1)]choosing unclosing move [(2, 0)]choosing unclosing move [(0, 1)]Cache Stats: {'hit': 187891, 'miss': 1869}
