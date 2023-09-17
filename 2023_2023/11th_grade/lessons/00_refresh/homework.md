@@ -21,7 +21,7 @@ Sunday, the 17th of September
 
 If you submitted 100% correct solution you should see the below screen, if not it will either tell you that you have a compilation problem (something wrong with the code) or that you didn't address all use cases, which means your code is valid, but there is a certain input that when provided to your code will yield an incorrect result. 
 
-Also, please do not use ChatGPT or similar tools, you can look up functions and ideas in the internet, but write the code yourself, the purpose is to get refresh your python skills, not to check if some AI can solve this problem. 
+Also, please do not use ChatGPT or similar tools, you can look up functions and ideas in the internet, but write the code yourself, the purpose is to get you to refresh your python skills, not to check if some AI can solve this problem. 
 
 ![This is how the screen looks if you submitted a 100% correct solution](fizzbuzz_screenshot.png)
 
