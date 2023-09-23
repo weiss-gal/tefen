@@ -3,5 +3,5 @@ def print_numbers(first, last):
     print(i+first)
 
     
-print_numbers(1,10) # printing
+print_numbers(1, 10)
 
