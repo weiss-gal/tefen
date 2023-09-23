@@ -28,9 +28,11 @@ Also, please do not use ChatGPT or similar tools, you can look up functions and 
 ## Problems and tips 
 # how to read the input line
 you didn't learn it yet, but the following command will take a string like "1 2 7" and put the numbers into the variables x, y and n as integer (מספר שלם)
-`
+
+```
 input_str = "1 2 7"
 x, y, n = map(int, input_str.split())
-`
+```
+
 # Minimal output 
-make sure that your code only output is the results, nothing else, no extra lines, no instructions for the user
+make sure that your code only output is the results, nothing else, no extra lines, no instructions for the user. the Kattis site is expecting just the result, nothing else. 
