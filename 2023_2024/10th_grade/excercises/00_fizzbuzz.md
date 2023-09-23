@@ -3,7 +3,7 @@ FizzBuzz is a simple programming problem that is used as a challenge or for inte
 We will use Kattis this time to challenge you. Kattis is a web site that hosts multiple programming problems and challenges, it allow you to post your solution as code in many languages and get immidiate results. You will need to create an account (using your gmail is the most recommended option)
 
 # Deadline 
-Sunday, the 17th of September
+Sunday, the 8th of October
 
 # How to send me the solution
 
@@ -25,3 +25,12 @@ Also, please do not use ChatGPT or similar tools, you can look up functions and 
 
 ![This is how the screen looks if you submitted a 100% correct solution](fizzbuzz_screenshot.png)
 
+## Problems and tips 
+# how to read the input line
+you didn't learn it yet, but the following command will take a string like "1 2 7" and put the numbers into the variables x, y and n as integer (מספר שלם)
+`
+input_str = "1 2 7"
+x, y, n = map(int, input_str.split())
+`
+# Minimal output 
+make sure that your code only output is the results, nothing else, no extra lines, no instructions for the user
