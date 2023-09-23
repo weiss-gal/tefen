@@ -1,6 +1,6 @@
 # Home Assigment 1 - FizzBuzz
 FizzBuzz is a simple programming problem that is used as a challenge or for interviews. 
-We will use Kattis this time to challenge you. Kattis is a web site that hosts multiple programming problems and challenges, it allow you to post your solution as code in many languages and get immidiate results. You will need to create an account (using your gmail is the most recommeded option)
+We will use Kattis this time to challenge you. Kattis is a web site that hosts multiple programming problems and challenges, it allow you to post your solution as code in many languages and get immidiate results. You will need to create an account (using your gmail is the most recommended option)
 
 # Deadline 
 Sunday, the 17th of September
