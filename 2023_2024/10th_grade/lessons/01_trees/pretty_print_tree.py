@@ -8,7 +8,6 @@ class Node:
 #   - get_upper()
 #   - get_lower()
 #   - get_word()
-    
 def pretty_print(tree, depth=0):
     if tree is None:
         return
