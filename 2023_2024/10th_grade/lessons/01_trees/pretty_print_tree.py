@@ -1,6 +1,7 @@
 import random
 
 class Node:
+    # TODO: implement the class
     print("Not implemented yet")
 
 # use this function to pretty print the tree
@@ -24,5 +25,7 @@ words = [
     'diamond', 'soccer', 'rainbow', 'silent', 'penguin', 'breeze', 'robot', 'crystal', 'basket', 'tornado'
 ]
 
+# TODO: create a tree with the words above
+root = None 
 
 pretty_print(root)
