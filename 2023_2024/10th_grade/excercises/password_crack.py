@@ -39,5 +39,6 @@ password = input()
 key = derive_key(password)
 decrypted_text = decrypt_text(encrypted_text, key)
 if decrypted_text is None:
-    print("Wrong password!")
-print(f"{decrypted_text}")
+    print("Sorry - Wrong password!")
+else:
+    print(f"{decrypted_text}")
