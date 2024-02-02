@@ -13,7 +13,7 @@
 - התיעוד ה"רשמי"
 [Data structures => dictionaries](https://docs.python.org/3/tutorial/datastructures.html#dictionaries)
 - הcheat sheet של הקורס
-- - האתר w3 schools שמספק תיעוד פשוט יחסית וקל לקריאה: https://www.w3schools.com/python/python_dictionaries.asp
+- האתר w3 schools שמספק תיעוד פשוט יחסית וקל לקריאה: https://www.w3schools.com/python/python_dictionaries.asp
 
 ## תרגיל מסכם בנושא מילונים: 
 הבתרגיל זה נתרגל את הידע שלנו בקריאה מקבצים ושימוש במילון.
