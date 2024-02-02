@@ -8,3 +8,4 @@ I will upload our materials here, feel free to look around yourself
 - [The python Arcade library web site](https://api.arcade.academy/en/latest/)
 - Python Tutorial in hebrew - [מדריך פייתון בשפת הקודש](https://reshetech.co.il/python-tutorials/all-the-tutorials)
 - An online free course in python for data science [Python Basics for Data Science](https://learning.edx.org/course/course-v1:IBM+PY0101EN+2T2021/home)
+- Python course in campus.il - [all the lectures on youtube ](https://www.youtube.com/watch?v=8qVy5hs6xDs&list=PLi5wNsn0QX4hAgdAqawlYt5_v_CoX6Q1n&index=1)
