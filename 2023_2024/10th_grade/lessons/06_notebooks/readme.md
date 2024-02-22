@@ -26,6 +26,12 @@
 [Kaggle datasets](https://www.kaggle.com/datasets)
 
 דוגמאות:
-- 
+- מי האומן הכי פופולרי ב8000 השירים הכי איקוניים בספוטיפי ?
+[לינק לרשימת השירים](https://www.kaggle.com/datasets/kanchana1990/spotifys-greatest-8000-iconic-tracks)
+- האם תקופת הקורונה השפיעה על כמות המשחקים שיצאו באותו תקופה
+[משחקים בחנות steam](https://www.kaggle.com/datasets/nikdavis/steam-store-games)
+- מה ז'אנר הסרטים הכי פופולרי בכל שנה? 
+[מאגר סרטים](https://www.kaggle.com/datasets/yashajitpaddalwar/tmdb-10000-movies-data)
+
 
 
