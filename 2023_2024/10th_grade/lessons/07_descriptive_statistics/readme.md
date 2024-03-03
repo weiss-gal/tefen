@@ -43,4 +43,11 @@
 
 ![image](https://github.com/weiss-gal/data_science_project/assets/8408299/7347573f-5ada-4ff6-a8e4-641cb4efa49f)
 
+## נושאים נוספים
+דיברנו בכיתה על רצף (sequence) שהוא למעשה אוסף תכונות שמתאים לרשימות, אבל גם לעוד דברים בפייתון, כמו למשל קבצי טקסט, מחרוזות וכו'. 
 
+הנה עוד סרטון על רשימות ורצפים מתוך הקורס בקמפוס il 
+
+https://www.youtube.com/watch?v=VZc2R7DBV4Q&list=PLi5wNsn0QX4hAgdAqawlYt5_v_CoX6Q1n&index=21
+
+בנוסף, כדאי להביט בעמוד השני של ה cheat sheet ולהזכר איזה פעולות אנחנו יכולים לבצע על רצפים ועל רשימות
