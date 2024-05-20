@@ -39,7 +39,7 @@ def decrypt_text(encrypted_text, password):
 # but you do need to know that it returns None if the key is wrong and the decrypted text otherwise.
 ####################################################################################################
 
-encrypted_text = b'gAAAAABlrEOme04y7wp-mtUAtKKS7nT4yE_2jfMtk2HF023BPLOYDNLwhqRCZmaGlB_01kfdinOXZ6uByK_ZDdIzN_QLmIBVBSBWmKZoHevV7YDUwFrNq0eFdH9lfxjXzQr5pP2HA9aLBEek0GRHq6dr0nRKQ-cVKgICOTn70-yiX4fsdzEymO3-FvNMFuMEJZuzL4ORPmvqJs7w2HYSIsrqbghuJcBVikzLkHxkyeZ3S2TLlvsaVbp5LQC-MBKLEWfpP7o6itWRYDQjrwwvC3DkzSdXXCuTmCvDsMlT4rD5hy0w7WZYyJWwx328kgU6QLNuHEZoOcP4'
+encrypted_text = b'gAAAAABmSvKvFIK4LTeEXR5-Q5MZ7UUCYrjcIH9YJ9D_50MTdfoQ1OyMa2FsXaiKFo0SAWrV5tXvQ79iZUhZlIR5obbCibRo-LYDl7qxwv96MAyy0rdU3hwfzKo02sRlGR-U3YApiOp3t3geMrG2uw9sKwVE_nFy_q2MJzeC9ulariADiZCDS9Uguw62Op1bVgPB_f15Y-SwqSpaaLxElj-UCP4Vb4aaiJ5esim1ojRGs20PfYQUXTbTDnzNl2YCeYijA8_On61uy7Y2tsO0p196uhfRg2Z5eMlqf9rUfBQdquliwPCZK3QeEOn6qjVhw4R2zB8I41YtSYQiERWrVSkxmsIHyAsTEo67cHshfIIh4sPajtixyIYRrqoRHhpb8TU732KbPGR_et4wsxmgcwX2F6d3nemKkms1Hsym4E477-0ZDHvzoY9aqFG3Z9sccucvu2iyzt6GFL5n4N6PJCam1iwou8Ra_iTegYz3nMzNR6JwWJ_Yusip1Ks9Tdh2kwA_lBM9BOiViTcF_WkrNKQPGeYB2TUvsQ=='
 
 print("Welcome to the password cracker challenge!")
 print("Enter the password to decrypt the text:")
