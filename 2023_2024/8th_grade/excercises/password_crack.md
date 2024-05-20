@@ -2,7 +2,7 @@
 
 המשימה שלכם, אם תבחרו לקבל אותה, היא לפצח את הסיסמא בתכנה הבאה:
 
-https://github.com/weiss-gal/data_science_project/blob/main/2023_2024/10th_grade/excercises/password_crack.py
+https://github.com/weiss-gal/data_science_project/blob/main/2023_2024/8th_grade/excercises/password_crack.py
 
 כדי להתחיל, הורידו את התכנה ונסו להריץ אותה פעם או פעמיים.
 
