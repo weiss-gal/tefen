@@ -19,14 +19,14 @@ def derive_key(password, salt=b'mysalt', iterations=10_000):
     key = base64.urlsafe_b64encode(kdf.derive(password.encode()))  # url-safe base64-encoded
     return key
 
-def encrypt_text(text, key):
-    cipher_suite = Fernet(key)
+def encrypt_text(text, password):
+    cipher_suite = Fernet(derive_key(password))
     encrypted_text = cipher_suite.encrypt(text.encode())
     return encrypted_text
 
-def decrypt_text(encrypted_text, key):
+def decrypt_text(encrypted_text, password):
     """Returns None if the key is wrong. and the decrypted text otherwise."""
-    cipher_suite = Fernet(key)
+    cipher_suite = Fernet(derive_key(password))
     try: 
         decrypted_text = cipher_suite.decrypt(encrypted_text).decode()
     except cryptography.fernet.InvalidToken:
@@ -44,8 +44,8 @@ encrypted_text = b'gAAAAABlrEOme04y7wp-mtUAtKKS7nT4yE_2jfMtk2HF023BPLOYDNLwhqRCZ
 print("Welcome to the password cracker challenge!")
 print("Enter the password to decrypt the text:")
 password = input()
-key = derive_key(password)
-decrypted_text = decrypt_text(encrypted_text, key)
+
+decrypted_text = decrypt_text(encrypted_text, password)
 if decrypted_text is None:
     print("Sorry - Wrong password!")
 else:
