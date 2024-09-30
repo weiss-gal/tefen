@@ -29,6 +29,10 @@ x is lower than 5
 **שלב בונוס בתרגיל**: מי שמרגיש מוכן יכול לשנות את התכנית כך שבמקום לשים במשתנה x ערך קבוע. התכנית תקרא מהמשתמש את הערך. 
 
 # חומר להשלמה וחזרה
+
+## מצגות מהשיעור
+- [מצגת ביטויים ומשתנים](https://github.com/weiss-gal/tefen/raw/refs/heads/main/2024_2025/10th_grade/lessons/00_values_and_variables/Python%20expressions%20and%20variables.pptx)
+
 ## משתנים בפייתון
  
 - [שיעור מוקלט על משתנים - חלק א](https://www.youtube.com/watch?v=5R9bJQvKAKQ&list=PLi5wNsn0QX4hAgdAqawlYt5_v_CoX6Q1n&index=5)
