@@ -45,3 +45,6 @@ x is lower than 5
 - [קישור לcheat sheet של פייתון בו מוסבר כיצד להשתמש במשפט התנאי if](https://github.com/weiss-gal/tefen/blob/main/manuals/python_cheat_sheet.pdf)
 
 # פתרון לדוגמא
+בפתרון הבא יש טיפול בקריאה של המספר מהמשתמש, אם כתבתם פתרון משלכם שימו לב האם הוא עובד גם עם מספרים גדולים מ10 וגם עם מספרים שליליים 
+
+[לינק לפתרון](https://github.com/weiss-gal/tefen/blob/main/2024_2025/10th_grade/lessons/00_values_and_variables/solution.py)
