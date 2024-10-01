@@ -24,3 +24,8 @@ print(sign)
 print(num2)
 ```
 **שימו לב** בשביל לפשט את הבעיה תמיד ניתן את התרגיל עם רווחים בין הסימן למספרים
+
+### פתרון מלא
+
+[לינק לפתרון מלא](https://github.com/weiss-gal/tefen/blob/main/2024_2025/10th_grade/lessons/01_conditions/solution.py)
+
