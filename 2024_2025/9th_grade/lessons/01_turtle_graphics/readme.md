@@ -5,3 +5,15 @@
 ```
 pip install turtle
 ```
+
+## תכנית דוגמא ראשונה
+התכנית הבאה תפתח מסך חדש, תיצור "צב" אחד בשם t ותיצור קו ישר:
+
+```
+import turtle
+
+window = turtle.Screen()
+t = turtle.Turtle()
+
+t.forward(100)
+```
