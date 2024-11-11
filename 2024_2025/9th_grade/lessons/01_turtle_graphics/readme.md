@@ -130,3 +130,39 @@ for i in range(num_of_triangles):
     size+=1
 
 ```
+
+## צבא של צבים
+כשאנחנו יוצרים "צב" בפייתון, הוא אובייקט לכל דבר, כמו רשימה, מחרוזת וכן הלאה. 
+לכן אין בעיה ליצור מספר צבים, אפילו ליצור רשימה בה כל פריט הוא צב ולחלק להם פקודות בלולאה. 
+
+```python
+import turtle
+import random as rnd
+
+window = turtle.Screen()
+turtle.colormode(255)
+
+turtle_num = 8
+turtle_army = []
+for i in range(turtle_num):
+    #create a new one:
+    t = turtle.Turtle()
+    t.speed(0)
+    t.color(rnd.randint(100,200), rnd.randint(100,200), rnd.randint(100,200))
+    t.left(int(360/turtle_num*i))
+
+    #add to list
+    turtle_army.append(t)
+
+for i in range(100):
+    for t in turtle_army:
+        t.forward(4)
+        t.right(2)
+
+```
+
+## התיעוד הרשמי של הספרייה turtle
+
+https://docs.python.org/3/library/turtle.html#
+
+
