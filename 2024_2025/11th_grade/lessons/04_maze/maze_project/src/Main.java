@@ -24,7 +24,7 @@ class MyMaze extends Maze{
 
     @Override
     public boolean hasWall(int x, int y) {
-        return false;
+        return content[x][y] == 1; 
     }
 }
 
