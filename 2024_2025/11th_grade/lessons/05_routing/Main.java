@@ -13,8 +13,8 @@ class Router {
     }
 }
 
-
 public class Main {
+
     public static void main(String[] args) {
         var router = new Router();
 
