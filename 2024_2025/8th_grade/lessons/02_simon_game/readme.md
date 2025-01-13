@@ -19,3 +19,6 @@ https://freesimon.org/
 
 - צבע + צליל אחד:
 [גרסה 2](https://github.com/weiss-gal/tefen/blob/main/2024_2025/8th_grade/lessons/02_simon_game/simon_2.aia)
+
+- מנגן צלילים ומשנה צבעים ברצף:
+[גרסה 3](https://github.com/weiss-gal/tefen/blob/main/2024_2025/8th_grade/lessons/02_simon_game/simon_3.aia)
