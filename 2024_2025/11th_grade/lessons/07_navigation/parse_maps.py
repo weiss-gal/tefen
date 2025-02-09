@@ -61,6 +61,7 @@ def parse_xml_to_json(xml_file, json_file):
             }
 
             data["edges"].append(edge_data)
+            prev_node = node
        
     # Save as JSON
     with open(json_file, "w", encoding="utf-8") as f:
