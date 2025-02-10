@@ -18,3 +18,7 @@
 פרוייקט לדוגמא:
 
 [גרסה 3](https://github.com/weiss-gal/tefen/blob/main/2024_2025/8th_grade/lessons/03_play_ball/play_ball3.aia)
+
+## שלב שלישי - בו נגלה את כח המשיכה (גרביטציה)
+
+המשך יבוא
