@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Route Selector</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        #map { height: 500px; }
+        .controls { margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <select id="from" disabled></select>
+        <select id="to" disabled></select>
+        <button id="calculate" style="display:none;">Calculate</button>
+    </div>
+    <div id="map"></div>
+
+    <script>
+        let map = L.map('map').setView([0, 0], 2);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        let fromMarker, toMarker, routeLayer;
+        let locations = [];
+
+        async function fetchLocations() {
+            let response = await fetch('/api/locations'); // Replace with actual endpoint
+            locations = await response.json();
+            populateDropdowns();
+        }
+
+        function populateDropdowns() {
+            let fromSelect = document.getElementById('from');
+            let toSelect = document.getElementById('to');
+            fromSelect.innerHTML = '<option value="">Select From</option>';
+            toSelect.innerHTML = '<option value="">Select To</option>';
+            locations.forEach(loc => {
+                let optionFrom = new Option(loc.name, loc.id);
+                let optionTo = new Option(loc.name, loc.id);
+                optionFrom.dataset.lat = loc.lat;
+                optionFrom.dataset.lng = loc.lon;
+                optionTo.dataset.lat = loc.lat;
+                optionTo.dataset.lng = loc.lon;
+                fromSelect.appendChild(optionFrom);
+                toSelect.appendChild(optionTo);
+            });
+            fromSelect.disabled = false;
+            toSelect.disabled = false;
+        }
+
+        function addMarker(select, markerVar, label) {
+            let selectedOption = select.options[select.selectedIndex];
+            if (!selectedOption.value) return;
+            let lat = selectedOption.dataset.lat;
+            let lng = selectedOption.dataset.lng;
+            if (markerVar) map.removeLayer(markerVar);
+            markerVar = L.marker([lat, lng]).addTo(map).bindPopup(label).openPopup();
+            map.setView([lat, lng], 10);
+            return markerVar;
+        }
+
+        document.getElementById('from').addEventListener('change', function() {
+            fromMarker = addMarker(this, fromMarker, 'From');
+            toggleCalculateButton();
+        });
+
+        document.getElementById('to').addEventListener('change', function() {
+            toMarker = addMarker(this, toMarker, 'To');
+            toggleCalculateButton();
+        });
+
+        function toggleCalculateButton() {
+            let fromSelected = document.getElementById('from').value;
+            let toSelected = document.getElementById('to').value;
+            document.getElementById('calculate').style.display = fromSelected && toSelected ? 'block' : 'none';
+        }
+
+        document.getElementById('calculate').addEventListener('click', async function() {
+            let fromId = document.getElementById('from').value;
+            let toId = document.getElementById('to').value;
+            let response = await fetch(`/api/route?from=${fromId}&to=${toId}`);
+            let route = await response.json();
+            // replace "lon" with "lng" in the response
+            route = route.map(point => [point.lat, point.lon]);
+            if (routeLayer) map.removeLayer(routeLayer);
+            routeLayer = L.polyline(route, { color: 'blue' }).addTo(map);
+            map.fitBounds(routeLayer.getBounds());
+        });
+
+        fetchLocations();
+    </script>
+</body>
+</html>
