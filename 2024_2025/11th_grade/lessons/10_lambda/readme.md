@@ -40,3 +40,10 @@ interface MyPredicate<Character>  {
     }
 ```
 
+כשנרצה להשתמש בפונקציה PrintAll נוכל להעביר מימוש של הממשק הזה בתור פרמטר, באופן הבא:
+```java
+//Print every character that is 30 years old or more
+Printall(characters, (Character c) -> c.age >= 30);
+```
+
+
