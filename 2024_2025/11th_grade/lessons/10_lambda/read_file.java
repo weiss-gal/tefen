@@ -6,7 +6,7 @@ class Main {
         // read a file
         Path filePath = Path.of("input.txt");
         
-        var lines = Files.readAllLines(filePath);
+        var lines = Files.lines(filePath);
         lines.forEach(System.out::println);
     }
 }
