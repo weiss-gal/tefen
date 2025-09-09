@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חוג פיתוח אפליקציות</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 0;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .section {
+            background: white;
+            margin: 40px 0;
+            border-radius: 20px;
+            padding: 60px 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #4a5568;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        /* FAQ Styles */
+        .faq-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 600px;
+            position: relative;
+        }
+
+        .faq-item {
+            background: #f8fafc;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            width: 300px;
+            max-width: 90%;
+        }
+
+        .faq-item:nth-child(1) {
+            transform: rotate(-2deg) translateY(20px);
+            margin-left: 50px;
+        }
+
+        .faq-item:nth-child(2) {
+            transform: rotate(1.5deg) translateY(-30px);
+            margin-right: 30px;
+        }
+
+        .faq-item:nth-child(3) {
+            transform: rotate(-1deg) translateY(40px);
+            margin-left: -20px;
+        }
+
+        .faq-item:nth-child(4) {
+            transform: rotate(2deg) translateY(-10px);
+            margin-right: 40px;
+        }
+
+        .faq-item:nth-child(5) {
+            transform: rotate(-1.5deg) translateY(30px);
+            margin-left: 20px;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            z-index: 10;
+        }
+
+        .faq-item:nth-child(1):hover {
+            transform: rotate(-2deg) translateY(15px) scale(1.02);
+        }
+
+        .faq-item:nth-child(2):hover {
+            transform: rotate(1.5deg) translateY(-35px) scale(1.02);
+        }
+
+        .faq-item:nth-child(3):hover {
+            transform: rotate(-1deg) translateY(35px) scale(1.02);
+        }
+
+        .faq-item:nth-child(4):hover {
+            transform: rotate(2deg) translateY(-15px) scale(1.02);
+        }
+
+        .faq-item:nth-child(5):hover {
+            transform: rotate(-1.5deg) translateY(25px) scale(1.02);
+        }
+
+        .faq-question {
+            padding: 25px 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+            color: #667eea;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .faq-answer.active {
+            max-height: 200px;
+        }
+
+        .faq-answer-content {
+            padding: 0 30px 30px;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        /* Gallery Styles */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #2d3748;
+        }
+
+        .project-description {
+            color: #4a5568;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .project-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section {
+                margin: 20px 0;
+                padding: 40px 20px;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>חוג פיתוח אפליקציות</h1>
+            <p>Develop mobile phone app with AppInventor</p>
+            <img src="logo.png" alt="AppInventor Logo" style="height: 80px; margin-top: 20px;">
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- FAQ Section -->
+        <section class="section">
+            <h2>שאלות נפוצות</h2>
+            <div class="faq-container">
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        מה אני אוכל לעשות בקורס?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            נלמד איך לפתח אפליקציות לטלפון נייד. נבנה אפליקציות שימושיות כמו מחשבון או רשימת משימות, וגם דברים כיפיים כמו חדר בריחה דיגיטלי או הורוסקופ. נוכל לשלב צבעים, צלילים, תמונות – וכל מה שהדמיון שלנו ימציא.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        מה אני צריך לדעת מראש?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            בעצם כמעט כלום. מספיק לדעת אנגלית בסיסית, מתמטיקה וגיאומטריה פשוטה. מה שחשוב באמת זה סקרנות ודמיון.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        מותר להביא טלפון נייד לשיעור?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            בוודאי!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        נוכל לכתוב משחקים?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            אפ-אינבנטר מצוין לפאזלים ומשחקים לא-ארקיידיים. אפשר גם לפתח משחקים גרפיים, אבל זה קצת יותר מורכב.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        האם אוכל לכתוב אפליקציה ולהרוויח ממנה כסף?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            אולי, אי אפשר לדעת. מה שבטוח – הקורס הזה הוא התחלה נהדרת בדרך לשם.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        יהיו שיעורי בית?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            לא חובה. אבל אני ממליץ להמשיך להתאמן בבית ולבנות דברים מגניבים משלכם.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="section">
+            <h2>פרויקטים לדוגמה</h2>
+            <div class="gallery">
+                <div class="project-card">
+                    <div class="project-image">
+                        🏀
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">כדור קופץ</h3>
+                        <p class="project-description">משחק פשוט שבו כדור קופץ על המסך, גררו את הכדור כדי לתת לו מהירות וסובבו את המסך כדי לשנות את כוח המשיכה. .</p>
+                        <a href="https://gallery.appinventor.mit.edu/?galleryid=1c7c957a-1128-4b40-a1b3-e803caa0c893" class="project-link">צפה בפרויקט</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        🥚
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">הביצה האמיצה - משחק</h3>
+                        <p class="project-description">זה משחק, פשוט תנסו</p>
+                        <a href="https://gallery.appinventor.mit.edu/?galleryid=eff8154f-765f-476b-a922-40f0421cb2d8" class="project-link">צפה בפרויקט</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        ⚖️
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">מחשבון BMI</h3>
+                        <p class="project-description">אפליקציה לחישוב BMI עם ממשק משתמש נעים. נלמד איך לעבוד עם קלט משתמש ולבצע חישובים פשוטים.</p>
+                        <a href="https://gallery.appinventor.mit.edu/?galleryid=5cb7b1bf-7596-4f34-a1b1-38c6f6906a00" class="project-link">צפה בפרויקט</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        🔮
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">אפליקציית לימוד אנגלית</h3>
+                        <p class="project-description">אחת האפליקציות הראשונות שניצור, נשתמש בא כדי ללמוד את הדברים הבסיסיים כמו כפתורים ותמונות.</p>
+                        <a href="https://gallery.appinventor.mit.edu/?galleryid=b6d77f1c-f640-496d-a707-1df0b9f3cb69" class="project-link">צפה בפרויקט</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        7️⃣
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">שבע בום - משחק לאוהבי מספרים</h3>
+                        <p class="project-description">שבע בום - משחק מוכר, רק הפעם, נשחק נגד השעון.</p>
+                        <a href="https://gallery.appinventor.mit.edu/?galleryid=57bff3bb-28d2-4a9f-8843-6403b15774bd" class="project-link">צפה בפרויקט</a>
+                    </div>
+                </div>
+
+               
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function toggleFaq(element) {
+            const answer = element.querySelector('.faq-answer');
+            const icon = element.querySelector('.faq-icon');
+            
+            // Close all other FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                if (item !== element) {
+                    item.classList.remove('active');
+                    item.querySelector('.faq-answer').classList.remove('active');
+                }
+            });
+            
+            // Toggle current item
+            element.classList.toggle('active');
+            answer.classList.toggle('active');
+        }
+
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.6s ease-out';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
