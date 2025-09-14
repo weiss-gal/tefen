@@ -14,3 +14,12 @@
 
 קישור לקוד דוגמא:
 [תכנית hello2](hello2.cs)
+
+## עוד מידע שימושי
+
+- איך מורידים Visual studio למחשב
+  - יש מספר דרכים, אבל הקלה ביותר היא לפתוח את הstore של windows (לחיצה על מקש חלונות והקלדת המילה store). בחנות נחפש את האפליקציה visual studio 2022 ונבחר להתקין אותה
+- קישור לקורס בקמפוס אי אל
+  - [קורס הכנה לבגרות - יסודות מדעי המחשב](https://app.campus.gov.il/learning/course/course-v1:MoE+EDU_Matric_ComputerScienceA_HE+2023_1/home)
+- קישור לסרטון על הכנת תכנית ראשונה
+  - [הוראות הדפסה ומשתנים](https://www.youtube.com/watch?v=P91Lcj3YeKU)
