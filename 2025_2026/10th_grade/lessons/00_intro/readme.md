@@ -23,3 +23,5 @@
   - [קורס הכנה לבגרות - יסודות מדעי המחשב](https://app.campus.gov.il/learning/course/course-v1:MoE+EDU_Matric_ComputerScienceA_HE+2023_1/home)
 - קישור לסרטון על הכנת תכנית ראשונה
   - [הוראות הדפסה ומשתנים](https://www.youtube.com/watch?v=P91Lcj3YeKU)
+- קישור לחומרי הלימוד באתר של הילה קדמן. מומלץ להסתכל על שיעור מספר 01
+  - [יסודות - חומר לימוד](https://kadman11.wordpress.com/%d7%99%d7%a1%d7%95%d7%93%d7%95%d7%aa/)
