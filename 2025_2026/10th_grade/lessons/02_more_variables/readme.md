@@ -98,6 +98,7 @@ Console.WriteLine((celsiusDegrees * (9/5.0)) + 32);
 ```csharp
 double a = 3.14;   // double
 float b = 3.14f;   // float (חייבים להוסיף f בסוף)
+```
 
 
 ## איך סי שארפ "מרחיבה" את הביטוי לשברים
