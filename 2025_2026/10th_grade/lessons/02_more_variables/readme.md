@@ -110,6 +110,7 @@ float b = 3.14f;   // float (חייבים להוסיף f בסוף)
 
 ```csharp
 Console.WriteLine(9 / 5.0);
+```
 
 ההמרה מהסוג הזה נקראת המרה מרומזת (Implicit Conversion)
 
@@ -128,7 +129,7 @@ Console.WriteLine(9 / 5.0);
 ```csharp
 int a = 5;
 double b = a;   // המרה מרומזת – int → double
-
+```
 
 ## המרה מפורשת (Explicit Conversion)
 
@@ -142,7 +143,7 @@ double b = a;   // המרה מרומזת – int → double
 double a = 9.8;
 int b = (int)a;   // המרה מפורשת – double → int
 Console.WriteLine(b);   // התוצאה: 9
-
+```
 
 # תרגיל בית 
 
