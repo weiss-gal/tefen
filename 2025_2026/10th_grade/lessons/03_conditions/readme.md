@@ -77,6 +77,3 @@ You are old enough to cross the road
 
 מועד הגשה: עד השיעור ביום ראשון ה19 לאוקטובר
 
----
-
-
