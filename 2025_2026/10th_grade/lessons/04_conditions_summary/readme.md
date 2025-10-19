@@ -1,7 +1,20 @@
 # משפט תנאי מורכב
 
 מצגת רלוונטית: 
-[משפט תנאי מורכב, עמוד 5 עד 31]()
+[משפט תנאי מורכב, עמוד 5 עד 31](https://drive.google.com/file/d/1sQ2w0r5qevaDh9YsmCyUni_z6ALmLVbW/view)
+
+פרק משפטי תנאי בקמפוס IL:
+(https://app.campus.gov.il/learning/course/course-v1:MoE+EDU_Matric_ComputerScienceA_HE+2023_1/block-v1:MoE+EDU_Matric_ComputerScienceA_HE+2023_1+type@sequential+block@7594d368001146dda5560ad2d5b7db04)[לינק לפרק - דורש הרשמה באמצעות גוגל או מייל]
+
+סרטון על שימוש בIF: 
+(https://www.youtube.com/watch?v=Jth2EptHSlE&t=5s)[לינק לסרטון]
+
+סרטון על שימוש בAND:
+(https://www.youtube.com/watch?v=dvevjy6wkuU)[לינק לסרטון]
+
+
+סרטון על שימוש בOR:
+(https://youtu.be/fygYdpb9wOI?si=ChFcFQU8pKvsBbQT)[לינק לסרטון]
 
 ## אופרטורים לוגיים 
 
@@ -48,3 +61,4 @@ if (number < 0 || number > 5)
 | 3️⃣ | לוגי | `!` | NOT | הופך את הערך הבוליאני | `!true` | ❌ false |
 | 4️⃣ | לוגי | `&&` | AND | true רק אם שני התנאים נכונים | `x > 0 && x < 10` | true אם x בין 1 ל־9 |
 | 5️⃣ | לוגי | <code>&#124;&#124;</code> | OR | true אם לפחות אחד מהתנאים נכון |  <code>x &lt; 0 &#124;&#124; x &gt; 10</code> | true אם x מחוץ לטווח |
+
