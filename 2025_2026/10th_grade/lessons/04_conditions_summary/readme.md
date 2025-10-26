@@ -62,3 +62,34 @@ if (number < 0 || number > 5)
 | 4️⃣ | לוגי | `&&` | AND | true רק אם שני התנאים נכונים | `x > 0 && x < 10` | true אם x בין 1 ל־9 |
 | 5️⃣ | לוגי | <code>&#124;&#124;</code> | OR | true אם לפחות אחד מהתנאים נכון |  <code>x &lt; 0 &#124;&#124; x &gt; 10</code> | true אם x מחוץ לטווח |
 
+# תרגיל כיתה
+
+פתח פרוייקט חדש וכתוב בו קוד עם שתי דוגמאות לשימוש בכל אחד מהאופרטורים הבאים:
+
+- שימוש ב"גם" (AND): &&
+- שימוש ב"או" (OR): || 
+- שימוש באופרטור השלילה (NOT): !
+
+בנוסף, כתוב דוגמא אחת המשלבת שני אופרטורים לפחות
+
+בכל דוגמא עליך לקלוט את כל הנתונים הנדרשים מהמשתמש, הקלט יכול להיות טקסטואלי (מחרוזת) או מספרי (שלם או שבר, לפי הצורך) 
+
+דוגמא לשימוש באופרטור "גם":
+
+```csharp
+Console.Write("Enter the temperature (°C): ");
+float temperature = float.Parse(Console.ReadLine());
+
+Console.Write("Is it sunny? (yes/no): ");
+string sunnyInput = Console.ReadLine().ToLower();
+
+if (temperature > 25 && sunnInput == "yes")
+{
+    Console.WriteLine("It's a good day for a swim!");
+}
+else
+{
+    Console.WriteLine("It's not a good day for a swim.");
+}
+```
+
