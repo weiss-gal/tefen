@@ -16,6 +16,10 @@
 סרטון על שימוש בOR:
 (https://youtu.be/fygYdpb9wOI?si=ChFcFQU8pKvsBbQT)[לינק לסרטון]
 
+הסבר על אופרטורים לוגיים באתר w3schools - כולל תרגול:
+
+(https://www.w3schools.com/cs/cs_operators_logical.php)[לינק לאתר]
+
 ## אופרטורים לוגיים 
 
 ### אופרטור AND (`&&`)
@@ -92,4 +96,5 @@ else
     Console.WriteLine("It's not a good day for a swim.");
 }
 ```
+
 
