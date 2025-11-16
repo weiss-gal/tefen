@@ -7,6 +7,8 @@ int i = 4;
 while (i % 7 != 1)
 {
     Console.Writeline(i);
+
+    i++;
 }
 
 ```
