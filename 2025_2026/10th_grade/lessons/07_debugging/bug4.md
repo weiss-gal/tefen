@@ -8,13 +8,13 @@
 
 ```csharp
 Console.Write("Enter a number: ");
-    int target = int.Parse(Console.ReadLine());
+int target = int.Parse(Console.ReadLine());
 
-    Random rnd = new Random();
+Random rnd = new Random();
 
-    int factor = rnd.Next(0, 5); // sometimes 0 → crash
-    int quotient = target / factor; // DivideByZeroException
-    int remainder = target % factor;
+int factor = rnd.Next(0, 5); // sometimes 0 → crash
+int quotient = target / factor; // DivideByZeroException
+int remainder = target % factor;
 
-    Console.WriteLine($"{target} can be created by {quotient} times {factor} plus {remainder}");
+Console.WriteLine($"{target} can be created by {quotient} times {factor} plus {remainder}");
 ```
