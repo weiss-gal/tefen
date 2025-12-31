@@ -111,6 +111,7 @@ Console.WriteLine(value);
 
 לדוגמא:
 
+<img width="465" height="379" alt="image" src="https://github.com/user-attachments/assets/8f2b4915-b97a-4172-9bcd-3f7d4eab095d" />
 
 בהצלחה
 
@@ -118,4 +119,5 @@ Console.WriteLine(value);
 
 - מצגת לולאת while - https://drive.google.com/file/d/120WawFrp0910tX4iEdddyXzNKjR33xNi/view
 - מצגת פונקציות - https://drive.google.com/file/d/1UlbQ47844jUnMyHxUZQsOWb4w50SOo9Q/view
+
 
