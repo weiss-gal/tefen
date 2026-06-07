@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מטלה: מנהל משימות ב-C#</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f5f6fa;
+    color: #222;
+    line-height: 1.8;
+    direction: rtl;
+  }
+
+  header {
+    background: linear-gradient(135deg, #1a237e, #283593);
+    color: white;
+    padding: 2rem 2.5rem;
+  }
+  header h1 { font-size: 1.8rem; font-weight: 700; }
+  header .meta { margin-top: 0.4rem; font-size: 0.9rem; opacity: 0.8; }
+
+  main { max-width: 860px; margin: 2rem auto; padding: 0 1.5rem 3rem; }
+
+  section {
+    background: white;
+    border-radius: 10px;
+    padding: 1.8rem 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+
+  h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1a237e;
+    margin-bottom: 1.1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e8eaf6;
+  }
+
+  p { margin-bottom: 0.8rem; }
+
+  /* ── Function / Method blocks ── */
+  .fn-block {
+    background: #f8f9ff;
+    border-right: 4px solid #3949ab;
+    border-radius: 6px;
+    padding: 0.9rem 1.1rem;
+    margin-bottom: 1rem;
+  }
+  .fn-name {
+    direction: ltr;
+    text-align: left;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #1565c0;
+    margin-bottom: 0.45rem;
+  }
+  .fn-desc {
+    font-size: 0.95rem;
+    color: #333;
+  }
+
+  /* ── Field table ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+    margin-top: 0.5rem;
+  }
+  th {
+    background: #e8eaf6;
+    color: #1a237e;
+    padding: 0.5rem 0.8rem;
+    text-align: right;
+    font-weight: 700;
+  }
+  td { padding: 0.5rem 0.8rem; border-bottom: 1px solid #eee; }
+  td.ltr, th.ltr {
+    direction: ltr;
+    text-align: left;
+    font-family: 'Consolas', 'Courier New', monospace;
+    color: #1565c0;
+  }
+  tr:last-child td { border-bottom: none; }
+
+  /* ── Inline code ── */
+  code {
+    background: #e8eaf6;
+    color: #283593;
+    padding: 0.1em 0.4em;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.88em;
+    direction: ltr;
+    display: inline-block;
+  }
+
+  /* ── Code blocks ── */
+  .code-wrap {
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0.8rem 0 0.4rem;
+    border: 1px solid #dde;
+    direction: ltr;
+  }
+  .code-header {
+    background: #282c34;
+    color: #abb2bf;
+    font-size: 0.78rem;
+    padding: 0.4rem 1rem;
+    text-align: left;
+  }
+  pre {
+    background: #282c34;
+    color: #abb2bf;
+    padding: 1rem 1.2rem;
+    overflow-x: auto;
+    font-size: 0.84rem;
+    line-height: 1.6;
+    margin: 0;
+    text-align: left;
+  }
+
+  /* ── Terminal examples ── */
+  .menu-box {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    border-radius: 8px;
+    padding: 1rem 1.3rem;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.88rem;
+    line-height: 1.8;
+    direction: ltr;
+    text-align: left;
+    margin: 0.6rem 0;
+  }
+  .menu-box .prompt { color: #89b4fa; }
+  .menu-box .input  { color: #a6e3a1; }
+  .menu-box .output { color: #f38ba8; }
+
+  /* ── Note / warning box ── */
+  .note {
+    background: #fffde7;
+    border-right: 4px solid #f9a825;
+    border-radius: 6px;
+    padding: 0.7rem 1rem;
+    font-size: 0.92rem;
+    color: #555;
+    margin-top: 0.8rem;
+  }
+
+  /* ── Hint box ── */
+  .hint {
+    background: #e8f5e9;
+    border-right: 4px solid #43a047;
+    border-radius: 6px;
+    padding: 0.7rem 1rem;
+    font-size: 0.92rem;
+    color: #2e7d32;
+    margin-top: 0.6rem;
+  }
+
+  /* ── Bonus section ── */
+  .bonus-section {
+    background: white;
+    border-radius: 10px;
+    padding: 1.8rem 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    border-top: 4px solid #f9a825;
+  }
+  .bonus-section h2 {
+    color: #e65100;
+    border-bottom-color: #ffe0b2;
+  }
+  .bonus-label {
+    display: inline-block;
+    background: #fff3e0;
+    color: #e65100;
+    border: 1px solid #ffcc80;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.1rem 0.6rem;
+    margin-right: 0.4rem;
+  }
+
+  /* ── Section badge ── */
+  .section-num {
+    display: inline-block;
+    background: #1a237e;
+    color: white;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 1.6rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-left: 0.5rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>מטלה: מנהל משימות</h1>
+  <div class="meta">שפת C# &nbsp;·&nbsp; מערכים ומחלקות</div>
+</header>
+
+<main>
+
+  <!-- ─── Part 1: Purpose ─── -->
+  <section>
+    <h2><span class="section-num">א</span> מטרת התוכנית</h2>
+
+    <p>
+      מנהל המשימות הוא תוכנית קונסול הכתובה ב-C# המאפשרת למשתמש לנהל רשימת משימות אישית.
+    </p>
+    <p>
+      התוכנית שומרת עד <strong>10 משימות</strong> במערך קבוע בגודל 10.
+      תא במערך שאינו מכיל משימה מכיל את הערך <code>null</code>.
+      המשתמש מתקשר עם התוכנית דרך תפריט פשוט בשורת הפקודה.
+    </p>
+    <p>
+      כל משימה מכילה: תיאור, תאריך (שנה, חודש, יום כמספרים שלמים) ועדיפות.
+    </p>
+    <div class="note">
+      ⚠️ שימו לב: במקום השם <code>Task</code> נשתמש ב-<code>MyTask</code> — כיוון ש-<code>Task</code> הוא שם שמור ב-.NET.
+    </div>
+  </section>
+
+  <!-- ─── Part 2: Usage ─── -->
+  <section>
+    <h2><span class="section-num">ב</span> אופן השימוש ודוגמאות</h2>
+
+    <p>בהפעלת התוכנית מוצג התפריט הבא:</p>
+    <div class="note" style="margin-bottom:0.8rem;">
+      הצבעים המוצגים בדוגמאות הם רק לצורך בהירות הקריאה — אין צורך להוסיף אותם לתוכנית.
+    </div>
+    <div class="menu-box">
+=== Task Manager ===<br>
+1. Add task<br>
+2. Remove task<br>
+3. Show by priority<br>
+4. Show by date<br>
+5. Exit<br>
+<span class="prompt">Choice: </span>
+    </div>
+
+    <p style="margin-top:1.2rem;"><strong>הוספת משימה — אפשרות 1</strong></p>
+    <p>
+      התוכנית מאתרת את התא הפנוי הראשון במערך ומבקשת מהמשתמש את הפרטים.
+      אם המערך מלא (כל 10 התאים תפוסים) — מוצגת הודעת שגיאה.
+    </p>
+    <div class="menu-box">
+<span class="prompt">Year:  </span><span class="input">2026</span><br>
+<span class="prompt">Month: </span><span class="input">06</span><br>
+<span class="prompt">Day:   </span><span class="input">15</span><br>
+<span class="prompt">Description: </span><span class="input">Submit homework</span><br>
+<span class="prompt">Priority (1=High 2=Medium 3=Low): </span><span class="input">1</span><br>
+<span class="output">Task added.</span>
+    </div>
+
+    <p style="margin-top:1.2rem;"><strong>הסרת משימה — אפשרות 2</strong></p>
+    <p>
+      התוכנית מציגה את כל המשימות עם מספורן, מבקשת מספר, ומאפסת את התא המתאים ל-<code>null</code>.
+      שאר המשימות נשארות במקומן במערך.
+    </p>
+    <div class="note">
+      שימו לב: מספר המשימה הוא מיקומו במערך + 1, לכן יתכן והמספרים לא יהיו רציפים — זו אינה טעות.
+    </div>
+    <div class="menu-box" style="margin-top:0.7rem;">
+All tasks:<br>
+&nbsp;&nbsp;1. [High]   2026/06/15 - Submit homework<br>
+&nbsp;&nbsp;3. [Low]    2026/08/20 - Read a book<br>
+&nbsp;&nbsp;7. [Medium] 2026/07/01 - Buy groceries<br>
+<span class="prompt">Task number to remove: </span><span class="input">3</span><br>
+<span class="output">Task removed.</span>
+    </div>
+
+    <p style="margin-top:1.2rem;"><strong>הצגה לפי עדיפות — אפשרות 3</strong></p>
+    <p>
+      המשימות מוצגות ממוינות מעדיפות גבוהה (1) לנמוכה (3).
+      המיון מבוצע על עותק זמני — המערך המקורי אינו משתנה.
+    </p>
+
+    <p style="margin-top:1.2rem;"><strong>הצגה לפי תאריך — אפשרות 4</strong></p>
+    <p>
+      המשימות מוצגות ממוינות מהתאריך המוקדם לאחרון.
+      המיון בודק תחילה שנה, אחר כך חודש, ולבסוף יום.
+    </p>
+  </section>
+
+  <!-- ─── Part 3: MyTask class ─── -->
+  <section>
+    <h2><span class="section-num">ג</span> מחלקה: <code>MyTask</code></h2>
+
+    <p>
+      המחלקה משמשת כמבנה נתונים. השדות הם <strong>פרטיים (private)</strong> —
+      גישה אליהם תתאפשר רק דרך getters.
+    </p>
+
+    <table>
+      <thead>
+        <tr><th class="ltr">שדה פרטי</th><th class="ltr">Getter</th><th>טיפוס</th><th>תיאור</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="ltr">year</td><td class="ltr">int GetYear()</td><td>int</td><td>שנת המשימה</td></tr>
+        <tr><td class="ltr">month</td><td class="ltr">int GetMonth()</td><td>int</td><td>חודש המשימה</td></tr>
+        <tr><td class="ltr">day</td><td class="ltr">int GetDay()</td><td>int</td><td>יום המשימה</td></tr>
+        <tr><td class="ltr">description</td><td class="ltr">string GetDescription()</td><td>string</td><td>תיאור המשימה</td></tr>
+        <tr><td class="ltr">priority</td><td class="ltr">int GetPriority()</td><td>int</td><td>עדיפות: 1=גבוהה, 2=בינונית, 3=נמוכה</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:0.7rem; font-size:0.9rem; color:#555;">
+      Setters אינם נדרשים במימוש הבסיסי — כל הערכים מוגדרים בבנאי ואינם משתנים.
+    </p>
+
+    <p style="margin-top:1.3rem;"><strong>מתודות:</strong></p>
+
+    <div class="fn-block">
+      <div class="fn-name">MyTask(int year, int month, int day, string description, int priority)</div>
+      <div class="fn-desc">בנאי. מקבל את כל פרטי המשימה ומאתחל את השדות הפרטיים.</div>
+    </div>
+
+    <div class="fn-block">
+      <div class="fn-name">string PriorityLabel()</div>
+      <div class="fn-desc">
+        מחזירה את שם העדיפות כטקסט: <code>"High"</code> / <code>"Medium"</code> / <code>"Low"</code>.<br>
+        משמשת את <code>ToString()</code> להדפסה נוחה.
+      </div>
+    </div>
+
+    <div class="fn-block">
+      <div class="fn-name">string ToString()</div>
+      <div class="fn-desc">
+        מחזירה ייצוג טקסטואלי של המשימה.<br>
+        דוגמה לפלט: <code>[High] 2026/06/15 - Submit homework</code>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Part 4: Static functions ─── -->
+  <section>
+    <h2><span class="section-num">ד</span> פונקציות סטטיות ב-<code>Program</code></h2>
+
+    <p>
+      כל הלוגיקה ממומשת כפונקציות סטטיות ב-<code>Program</code>.
+      מערך המשימות מוגדר ב-<code>Main</code> ומועבר כפרמטר לכל פונקציה שזקוקה לו:
+    </p>
+    <div class="code-wrap">
+      <div class="code-header">C#</div>
+      <pre>MyTask[] tasks = new MyTask[10];</pre>
+    </div>
+
+    <p style="margin-top:1.3rem;"><strong>פונקציות:</strong></p>
+
+    <div class="fn-block">
+      <div class="fn-name">void AddTask(MyTask[] tasks)</div>
+      <div class="fn-desc">
+        מקבלת את מערך המשימות כפרמטר.<br>
+        מחפשת את התא הפנוי הראשון (ערך <code>null</code>) במערך.<br>
+        אם לא נמצא תא פנוי — מדפיסה הודעת שגיאה ויוצאת.<br>
+        אחרת, מבקשת מהמשתמש שנה, חודש, יום, תיאור ועדיפות, ויוצרת אובייקט <code>MyTask</code> חדש בתא שנמצא.
+      </div>
+    </div>
+
+    <div class="fn-block">
+      <div class="fn-name">void RemoveTask(MyTask[] tasks)</div>
+      <div class="fn-desc">
+        מקבלת את מערך המשימות כפרמטר.<br>
+        קוראת ל-<code>DisplayAll(tasks)</code> כדי להציג את המשימות עם מספורן.<br>
+        מבקשת מהמשתמש מספר משימה (מיקום במערך + 1), ומאפסת את התא המתאים ל-<code>null</code>.<br>
+        שאר המשימות נשארות במקומן — אין הזזת איברים.
+      </div>
+    </div>
+
+    <div class="fn-block">
+      <div class="fn-name">void DisplayAll(MyTask[] tasks)</div>
+      <div class="fn-desc">
+        מקבלת את מערך המשימות כפרמטר.<br>
+        עוברת על המערך ומדפיסה את כל המשימות שאינן <code>null</code>.<br>
+        מספר המשימה הוא מיקומה במערך + 1, ולכן המספרים עשויים להיות לא רציפים (לדוגמה: 1, 3, 7).<br>
+        כל משימה מוצגת באמצעות קריאה ל-<code>MyTask.ToString()</code>.
+      </div>
+    </div>
+
+    <div class="fn-block">
+      <div class="fn-name">void DisplayByPriority(MyTask[] tasks)</div>
+      <div class="fn-desc">
+        מקבלת את מערך המשימות כפרמטר.<br>
+        קוראת ל-<code>Compact(tasks)</code> לקבלת מערך צפוף ללא <code>null</code>.<br>
+        ממיינת אותו באמצעות מיון בועות לפי שדה <code>GetPriority()</code> מהנמוך לגבוה.<br>
+        מדפיסה את המשימות הממוינות עם מספור רץ.
+      </div>
+    </div>
+
+    <div class="fn-block">
+      <div class="fn-name">void DisplayByDate(MyTask[] tasks)</div>
+      <div class="fn-desc">
+        מקבלת את מערך המשימות כפרמטר.<br>
+        קוראת ל-<code>Compact(tasks)</code> לקבלת מערך צפוף ללא <code>null</code>.<br>
+        ממיינת אותו באמצעות מיון בועות מהתאריך המוקדם לאחרון.<br>
+        מדפיסה את המשימות הממוינות עם מספור רץ.
+      </div>
+      <div class="hint">
+        💡 רעיון למימוש: כדי להשוות תאריכים בקלות, ניתן להמיר כל תאריך למספר אחד:<br>
+        <code>GetYear() × 365 + GetMonth() × 31 + GetDay()</code><br>
+        המספר אינו מדויק מבחינה קלנדרית, אך מספיק לצורך מיון.
+      </div>
+    </div>
+
+    <div class="fn-block">
+      <div class="fn-name">MyTask[] Compact(MyTask[] tasks)</div>
+      <div class="fn-desc">
+        מקבלת את מערך המשימות כפרמטר.<br>
+        פונקציית עזר המשמשת את שתי פונקציות המיון.<br>
+        סופרת כמה תאים אינם <code>null</code>, יוצרת מערך חדש בגודל זה, ומעתיקה אליו רק את המשימות הקיימות.<br>
+        מחזירה את המערך החדש. <strong>אינה משנה את המערך המקורי <code>tasks</code></strong>.
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ─── Bonus 1 ─── -->
+  <section class="bonus-section">
+    <h2><span class="bonus-label">בונוס 25%</span> בדיקות תקינות קלט</h2>
+
+    <p>
+      הוסף בדיקות תקינות לכל קלטי המשתמש בפונקציה <code>AddTask(MyTask[] tasks)</code>.
+      יש לקרוא את הקלטים בסדר הבא:
+    </p>
+    <p style="text-align:center; font-size:1.05rem; font-weight:700; letter-spacing:0.03em; margin: 0.5rem 0 0.8rem;">
+      שנה &nbsp;&#x2192;&nbsp; חודש &nbsp;&#x2192;&nbsp; יום
+    </p>
+    <p>
+      כך שניתן לאמת את היום לפי החודש והשנה שכבר הוזנו.
+    </p>
+
+    <p><strong>חוקי תקינות:</strong></p>
+    <p>שנה — חייבת להיות מספר חיובי (גדול מ-0).</p>
+    <p>חודש — חייב להיות בין 1 ל-12.</p>
+    <p>עדיפות — חייבת להיות 1, 2 או 3.</p>
+    <p>יום — חייב להיות בין 1 למספר הימים המרבי בחודש. מספר הימים תלוי בחודש ובשאלה האם השנה היא שנת מעוברת:</p>
+
+    <table style="margin-top:0.5rem;">
+      <thead>
+        <tr><th class="ltr">חודש</th><th>ימים</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="ltr">1, 3, 5, 7, 8, 10, 12</td><td>31</td></tr>
+        <tr><td class="ltr">4, 6, 9, 11</td><td>30</td></tr>
+        <tr><td class="ltr">2 (שנה רגילה)</td><td>28</td></tr>
+        <tr><td class="ltr">2 (שנה מעוברת)</td><td>29</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:1rem;"><strong>כלל שנה מעוברת (Leap Year):</strong></p>
+    <p>שנה היא מעוברת אם מתקיים אחד מהתנאים הבאים:</p>
+    <p>— מתחלקת ב-4 ואינה מתחלקת ב-100</p>
+    <p>— מתחלקת ב-400</p>
+    <p>לדוגמה: 2024 מעוברת (מתחלקת ב-4 ולא ב-100). 1900 אינה מעוברת (מתחלקת ב-100 אך לא ב-400). 2000 מעוברת (מתחלקת ב-400).</p>
+
+    <div class="hint">
+      💡 רעיון למימוש: ניתן לשמור מערך של מספר הימים בכל חודש —
+      <code>int[] daysInMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 }</code>
+      ואז לבדוק האם השנה מעוברת כדי להחליט אם לאפשר יום 29 בפברואר.
+    </div>
+  </section>
+
+  <!-- ─── Bonus 2 ─── -->
+  <section class="bonus-section">
+    <h2><span class="bonus-label">בונוס 10%</span> עריכת תיאור משימה</h2>
+
+    <p>
+      הוסף לתפריט אפשרות נוספת לעדכון תיאור של משימה קיימת.
+    </p>
+    <p>
+      התוכנית תציג את המשימות, תבקש מספר משימה, ואז תבקש תיאור חדש ותעדכן אותו.
+    </p>
+
+    <div class="note">
+      ⚠️ שימו לב: כדי לאפשר שינוי תיאור לאחר יצירת האובייקט, יש להוסיף setter לשדה
+      <code>Description</code> במחלקה <code>MyTask</code>.
+    </div>
+  </section>
+
+</main>
+</body>
+</html>
