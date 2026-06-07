@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>null במערכים — מערך דליל ומערך צפוף</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f4f6fa;
+      color: #1e1e2e;
+      direction: rtl;
+      padding: 2rem;
+      line-height: 1.7;
+    }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: #1e3a5f;
+      color: white;
+      border-radius: 12px;
+      padding: 2rem 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 1.9rem;
+      margin-bottom: 0.3rem;
+    }
+
+    header p {
+      opacity: 0.75;
+      font-size: 0.95rem;
+    }
+
+    .section {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem 2.5rem;
+      margin-bottom: 1.8rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+
+    .section h2 {
+      font-size: 1.3rem;
+      color: #1e3a5f;
+      border-right: 4px solid #3b82f6;
+      padding-right: 0.75rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .section p, .section li {
+      font-size: 1rem;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .section ul {
+      padding-right: 1.5rem;
+      list-style: disc;
+    }
+
+    /* Inline code */
+    code.inline {
+      background: #eef2ff;
+      color: #3730a3;
+      padding: 0.1em 0.45em;
+      border-radius: 4px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 0.92em;
+      direction: ltr;
+      display: inline-block;
+    }
+
+    /* Code blocks */
+    .code-block {
+      margin-top: 1.2rem;
+      border-radius: 8px;
+      overflow: hidden;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .code-block pre {
+      margin: 0;
+    }
+
+    .code-block code {
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 0.9rem;
+      border-radius: 0;
+    }
+
+    /* Array diagram */
+    .array-diagram {
+      display: flex;
+      flex-direction: row-reverse;
+      gap: 0;
+      margin: 1.2rem 0 0.5rem 0;
+      align-items: flex-end;
+    }
+
+    .array-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 70px;
+    }
+
+    .cell-box {
+      width: 60px;
+      height: 60px;
+      border: 2px solid #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-family: 'Consolas', monospace;
+      font-weight: bold;
+      background: white;
+      direction: ltr;
+    }
+
+    .cell-box.filled {
+      background: #dbeafe;
+      border-color: #3b82f6;
+      color: #1d4ed8;
+    }
+
+    .cell-box.empty {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+      color: #94a3b8;
+      font-style: italic;
+    }
+
+    .cell-index {
+      font-size: 0.72rem;
+      color: #64748b;
+      margin-top: 4px;
+      font-family: 'Consolas', monospace;
+    }
+
+    .diagram-label {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 0.6rem;
+    }
+
+    .two-diagrams {
+      display: flex;
+      flex-direction: row-reverse;
+      gap: 2.5rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .diagram-group {
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .diagram-group h3 {
+      font-size: 1rem;
+      margin-bottom: 0.6rem;
+      color: #1e3a5f;
+    }
+
+    .tag-dense { color: #15803d; }
+    .tag-sparse { color: #b45309; }
+
+    /* Note box */
+    .note {
+      background: #fef9c3;
+      border-right: 4px solid #eab308;
+      border-radius: 6px;
+      padding: 0.8rem 1rem;
+      margin-top: 1rem;
+      font-size: 0.93rem;
+      color: #713f12;
+    }
+
+    /* Step labels in code */
+    .step-label {
+      display: inline-block;
+      background: #3b82f6;
+      color: white;
+      font-size: 0.75rem;
+      padding: 0.15em 0.5em;
+      border-radius: 4px;
+      margin-bottom: 0.3rem;
+      direction: rtl;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1>null במערכים — מערך דליל ומערך צפוף</h1>
+    <p>C# · רמת מתחילים–בינוניים</p>
+  </header>
+
+  <!-- ── Section 1: null recap ── -->
+  <div class="section">
+    <h2>1. null ב-C# — תזכורת</h2>
+
+    <p>
+      <code class="inline">null</code> הוא ערך מיוחד שמשמעותו: <strong>"אין כאן אובייקט"</strong>.
+      הוא שייך לטיפוסי הפניה (<em>reference types</em>) — כמו מחלקות (<code class="inline">class</code>).
+      מספרים (<code class="inline">int</code>, <code class="inline">double</code>) <em>אינם</em> יכולים להיות null — ניתן ליצור משתנים מסוג זה כך שאפשר יהיה להציב בהם null, אך לא למדנו עדיין זאת.
+    </p>
+
+    <ul style="margin-top:0.8rem;">
+      <li><strong>השמת null:</strong> מציינים שהמשתנה לא מצביע על שום אובייקט.</li>
+      <li><strong>השוואה ל-null:</strong> בודקים אם אובייקט קיים לפני שמשתמשים בו.</li>
+      <li>גישה לאובייקט שהוא <code class="inline">null</code> תגרום לשגיאה בזמן ריצה — <code class="inline">NullReferenceException</code>.</li>
+    </ul>
+
+    <div class="code-block">
+      <pre><code class="language-csharp">// השמת null — p לא מצביע על שום אובייקט
+Point p = null;
+
+// השוואה ל-null לפני שימוש
+if (p == null)
+{
+    Console.WriteLine("No point");
+}
+
+if (p != null)
+{
+    Console.WriteLine("Point: " + p.X + ", " + p.Y);
+}</code></pre>
+    </div>
+
+    <div class="note">
+      ⚠️ כאשר אנחנו ניגשים לאובייקט ויכול להיות שהוא <code class="inline">null</code>, תמיד נבדוק זאת לפני שאנחנו מנסים להשתמש בתכונה (property) או שיטה (method) של האובייקט.
+    </div>
+  </div>
+
+  <!-- ── Section 2 & 3: Dense vs Sparse ── -->
+  <div class="section">
+    <h2>2. מערך צפוף לעומת מערך דליל</h2>
+
+    <div class="two-diagrams">
+
+      <div class="diagram-group">
+        <h3 class="tag-dense">מערך צפוף (Dense Array)</h3>
+        <p style="font-size:0.9rem; margin-bottom:0.7rem;">
+          כל תא במערך מכיל ערך אמיתי — אין תאים ריקים.
+        </p>
+        <div class="array-diagram">
+          <div class="array-cell">
+            <div class="cell-box filled">P(5,6)</div>
+            <div class="cell-index">[4]</div>
+          </div>
+          <div class="array-cell">
+            <div class="cell-box filled">P(3,4)</div>
+            <div class="cell-index">[3]</div>
+          </div>
+          <div class="array-cell">
+            <div class="cell-box filled">P(7,1)</div>
+            <div class="cell-index">[2]</div>
+          </div>
+          <div class="array-cell">
+            <div class="cell-box filled">P(2,8)</div>
+            <div class="cell-index">[1]</div>
+          </div>
+          <div class="array-cell">
+            <div class="cell-box filled">P(1,2)</div>
+            <div class="cell-index">[0]</div>
+          </div>
+        </div>
+        <p class="diagram-label">כל אינדקס — ערך תקין ✓</p>
+      </div>
+
+      <div class="diagram-group">
+        <h3 class="tag-sparse">מערך דליל (Sparse Array)</h3>
+        <p style="font-size:0.9rem; margin-bottom:0.7rem;">
+          חלק מהתאים מכילים <code class="inline">null</code> — "תאים ריקים".
+        </p>
+        <div class="array-diagram">
+          <div class="array-cell">
+            <div class="cell-box filled">P(5,6)</div>
+            <div class="cell-index">[4]</div>
+          </div>
+          <div class="array-cell">
+            <div class="cell-box empty">null</div>
+            <div class="cell-index">[3]</div>
+          </div>
+          <div class="array-cell">
+            <div class="cell-box filled">P(3,4)</div>
+            <div class="cell-index">[2]</div>
+          </div>
+          <div class="array-cell">
+            <div class="cell-box empty">null</div>
+            <div class="cell-index">[1]</div>
+          </div>
+          <div class="array-cell">
+            <div class="cell-box filled">P(1,2)</div>
+            <div class="cell-index">[0]</div>
+          </div>
+        </div>
+        <p class="diagram-label">תאים [1] ו-[3] ריקים — null</p>
+      </div>
+
+    </div>
+
+    <p style="margin-top:1.2rem;">
+      מערך דליל שימושי כאשר אנחנו רוצים להקצות מראש מקומות בגודל קבוע, אבל אנחנו לא תמיד משתמשים בכל המקומות.
+      לפעמים הוא שימושי גם כאשר טווח האינדקסים שאנחנו צריכים הוא מאוד גדול אבל רובם ריקים.
+      באופן כללי ניתן לומר שזו טכניקה שמשתמשים בה במקרים מאוד מסויימים — אבל רוב הזמן נשתדל לעבוד עם מערכים רגילים / צפופים.
+    </p>
+  </div>
+
+  <!-- ── Section 4: Creating sparse + Point class ── -->
+  <div class="section">
+    <h2>3. יצירת מערך דליל (Sparse Array) והוספת אברים</h2>
+
+    <p>
+      נגדיר מחלקת <code class="inline">Point</code> פשוטה, ניצור מערך דליל בגודל 5,
+      ונמלא רק חלק מהתאים.
+    </p>
+
+    <div class="code-block">
+      <pre><code class="language-csharp">// הגדרת מחלקת Point
+class Point
+{
+    public int X;
+    public int Y;
+
+    public Point(int x, int y)
+    {
+        X = x;
+        Y = y;
+    }
+}
+
+// יצירת מערך דליל (sparse array) בגודל 5
+// כל התאים מאותחלים אוטומטית ל-null
+Point[] sparse = new Point[5];
+
+// הוספת אברים לתאים ספציפיים בלבד
+sparse[0] = new Point(1, 2);
+sparse[2] = new Point(3, 4);
+sparse[4] = new Point(5, 6);
+
+// sparse[1] ו-sparse[3] נשארים null</code></pre>
+    </div>
+
+    <div class="note">
+      💡 כשיוצרים מערך של טיפוס הפניה עם <code class="inline">new Point[5]</code>,
+      כל התאים מקבלים אוטומטית את הערך <code class="inline">null</code> — מפני שזהו ערך ברירת המחדל (default) עבור טיפוסי הפניה.<br><br>
+      למרות זאת, בשיעור זה לא נסמוך על ברירת המחדל — אם אנחנו רוצים מערך דליל, נאתחל בעצמנו קודם את כל האינדקסים ל-<code class="inline">null</code> במפורש.
+    </div>
+  </div>
+
+  <!-- ── Section 5: Compact sparse → dense ── -->
+  <div class="section">
+    <h2>4. דחיסת מערך דליל למערך צפוף</h2>
+
+    <p>
+      רוצים להפוך את המערך הדליל למערך צפוף — ללא null, ללא "חורים".
+      עושים זאת ב-3 שלבים, <strong>ללא שינוי המערך המקורי</strong> (ההפך מ-in-place):
+    </p>
+
+    <div class="code-block">
+      <pre><code class="language-csharp">// שלב 1: ספירת האברים שאינם null
+int count = 0;
+for (int i = 0; i < sparse.Length; i++)
+{
+    if (sparse[i] != null)
+    {
+        count++;
+    }
+}
+
+// שלב 2: יצירת מערך צפוף חדש בגודל המדויק
+Point[] dense = new Point[count];
+
+// שלב 3: העתקת הערכים מהמערך הדליל למערך הצפוף
+int j = 0;
+for (int i = 0; i < sparse.Length; i++)
+{
+    if (sparse[i] != null)
+    {
+        dense[j] = sparse[i];
+        j++;
+    }
+}
+
+// התוצאה: dense הוא מערך צפוף ללא null</code></pre>
+    </div>
+
+    <p style="margin-top:1rem; font-size:0.95rem; color:#555;">
+      בסיום: <code class="inline">sparse</code> — לא השתנה (עדיין דליל),
+      <code class="inline">dense</code> — מערך צפוף חדש עם 3 נקודות בלבד.
+    </p>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    hljs.highlightAll();
+  });
+</script>
+</body>
+</html>
