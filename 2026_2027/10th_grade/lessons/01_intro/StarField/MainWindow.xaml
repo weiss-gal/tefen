@@ -1,0 +1,11 @@
+<Window x:Class="StarField.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Star Field Simulation"
+        WindowStyle="None"
+        WindowState="Maximized"
+        ResizeMode="NoResize"
+        Background="Black"
+        KeyDown="Window_KeyDown">
+    <Canvas x:Name="MainCanvas" Background="Black" ClipToBounds="True" />
+</Window>
