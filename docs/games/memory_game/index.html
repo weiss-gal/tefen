@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>משחק זיכרון</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+      body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; background: #f8f9fa; }
+      .board { display: grid; grid-template-columns: repeat(6, 1fr); gap: .6rem; max-width: 720px; margin: 0 auto; }
+      .card-slot { aspect-ratio: 3 / 4; perspective: 600px; }
+      .flip { position: relative; width: 100%; height: 100%; transition: transform .35s; transform-style: preserve-3d; cursor: pointer; }
+      .card-slot.open .flip { transform: rotateY(180deg); }
+      .face { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; border-radius: .5rem; backface-visibility: hidden; font-size: clamp(1.2rem, 4vw, 2.2rem); font-weight: 700; }
+      .face.back { background: #0d6efd; color: #fff; }
+      .face.front { background: #fff; border: 2px solid #0d6efd; color: #212529; transform: rotateY(180deg); }
+      .card-slot.removed { visibility: hidden; }
+      .board.locked .flip { pointer-events: none; }
+      .player { padding: .5rem 1rem; border-radius: .5rem; background: #fff; border: 2px solid #dee2e6; }
+      .player.active { border-color: #198754; background: #e8f5ee; }
+      dialog { border: 0; border-radius: .75rem; padding: 1.5rem 2rem; text-align: center; }
+      dialog::backdrop { background: rgba(0, 0, 0, .5); }
+      .match-cards { display: flex; gap: 1.5rem; justify-content: center; margin: 1rem 0; }
+      .match-cards .big { width: 140px; aspect-ratio: 3 / 4; display: flex; align-items: center; justify-content: center; border-radius: .75rem; background: #fff; border: 3px solid #198754; font-size: 3rem; font-weight: 700; }
+    </style>
+  </head>
+  <body>
+    <main class="container my-4">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h3 m-0">משחק זיכרון</h1>
+        <button id="restart" class="btn btn-outline-danger btn-sm d-none">התחלה מחדש</button>
+      </div>
+
+      <section id="setup" class="card mx-auto" style="max-width: 480px">
+        <div class="card-body">
+          <h2 class="h5">מי משחק?</h2>
+          <p class="text-muted small">הכניסו 1 עד 4 שמות</p>
+          <form id="setup-form">
+            <input class="form-control mb-2" placeholder="שחקן 1" required />
+            <input class="form-control mb-2" placeholder="שחקן 2" />
+            <input class="form-control mb-2" placeholder="שחקן 3" />
+            <input class="form-control mb-3" placeholder="שחקן 4" />
+            <button class="btn btn-primary w-100">התחל משחק</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="game" class="d-none">
+        <div id="players" class="d-flex flex-wrap gap-2 justify-content-center mb-3"></div>
+        <div id="board" class="board"></div>
+      </section>
+
+      <section id="over" class="card mx-auto text-center d-none" style="max-width: 480px">
+        <div class="card-body">
+          <h2 class="h4" id="winner"></h2>
+          <ul id="final-scores" class="list-unstyled mb-3"></ul>
+          <button id="play-again" class="btn btn-primary">משחק חדש</button>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="match-dialog">
+      <h2 class="h4 text-success">התאמה! 🎉</h2>
+      <div class="match-cards"><div class="big" id="match-a"></div><div class="big" id="match-b"></div></div>
+      <p class="mb-3" id="match-msg"></p>
+      <button id="match-continue" class="btn btn-success">המשך</button>
+    </dialog>
+
+    <script>
+      const ROWS = 4, COLS = 6, PAIRS = (ROWS * COLS) / 2;
+      const KEY = 'memory-game';
+      const FALLBACK_PAIRS = 'abcdefghijkl'.split('').map((b, i) => ({ a: String(i + 1), b }));
+
+      const $ = (id) => document.getElementById(id);
+      const esc = (s) => String(s).replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
+      let state = null;
+
+      const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch {} };
+      const load = () => { try { return JSON.parse(localStorage.getItem(KEY)); } catch { return null; } };
+      const clear = () => { try { localStorage.removeItem(KEY); } catch {} };
+
+      async function loadPairs() {
+        try {
+          const res = await fetch('pairs.json');
+          if (!res.ok) throw new Error(res.status);
+          return await res.json();
+        } catch {
+          return FALLBACK_PAIRS;
+        }
+      }
+
+      function shuffle(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      async function newGame(names) {
+        const pairs = shuffle((await loadPairs()).slice()).slice(0, PAIRS);
+        const cards = shuffle(pairs.flatMap((p, id) => [
+          { id, text: p.a, open: false, removed: false },
+          { id, text: p.b, open: false, removed: false },
+        ]));
+        state = { names, scores: names.map(() => 0), turn: 0, cards, flipped: [] };
+        save();
+        render();
+      }
+
+      function flip(i) {
+        const card = state.cards[i];
+        if (card.open || card.removed || state.flipped.length === 2) return;
+        card.open = true;
+        state.flipped.push(i);
+        save();
+        render();
+        if (state.flipped.length === 2) setTimeout(resolveTurn, 800);
+      }
+
+      function resolveTurn() {
+        const [a, b] = state.flipped.map((i) => state.cards[i]);
+        if (a.id === b.id) {
+          a.removed = b.removed = true;
+          state.scores[state.turn]++;
+          showMatch(a, b);
+        } else {
+          a.open = b.open = false;
+          state.turn = (state.turn + 1) % state.names.length;
+        }
+        state.flipped = [];
+        save();
+        render();
+      }
+
+      function render() {
+        const over = state.cards.every((c) => c.removed);
+        $('setup').classList.add('d-none');
+        $('game').classList.toggle('d-none', over);
+        $('over').classList.toggle('d-none', !over);
+        $('restart').classList.remove('d-none');
+        if (over) return renderOver();
+
+        $('players').innerHTML = state.names.map((n, i) =>
+          `<div class="player ${i === state.turn ? 'active' : ''}"><strong>${esc(n)}</strong>: ${state.scores[i]}</div>`
+        ).join('');
+
+        const board = $('board');
+        board.classList.toggle('locked', state.flipped.length === 2);
+        board.innerHTML = state.cards.map((c, i) =>
+          `<div class="card-slot ${c.open ? 'open' : ''} ${c.removed ? 'removed' : ''}" data-i="${i}">
+             <div class="flip"><div class="face back">?</div><div class="face front">${esc(c.text)}</div></div>
+           </div>`
+        ).join('');
+      }
+
+      function showMatch(a, b) {
+        $('match-a').textContent = a.text;
+        $('match-b').textContent = b.text;
+        $('match-msg').textContent = `${state.names[state.turn]} מקבל/ת נקודה ותור נוסף`;
+        $('match-dialog').showModal();
+      }
+
+      function renderOver() {
+        const max = Math.max(...state.scores);
+        const winners = state.names.filter((_, i) => state.scores[i] === max);
+        $('winner').textContent = winners.length > 1 ? `תיקו! ${winners.join(', ')}` : `המנצח: ${winners[0]} 🏆`;
+        $('final-scores').innerHTML = state.names.map((n, i) => `<li>${esc(n)}: ${state.scores[i]}</li>`).join('');
+      }
+
+      function reset() {
+        clear();
+        state = null;
+        $('setup').classList.remove('d-none');
+        $('game').classList.add('d-none');
+        $('over').classList.add('d-none');
+        $('restart').classList.add('d-none');
+      }
+
+      $('setup-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const names = [...e.target.querySelectorAll('input')].map((i) => i.value.trim()).filter(Boolean);
+        if (names.length) newGame(names);
+      });
+      $('board').addEventListener('click', (e) => {
+        const slot = e.target.closest('.card-slot');
+        if (slot) flip(Number(slot.dataset.i));
+      });
+      $('match-continue').addEventListener('click', () => $('match-dialog').close());
+      $('restart').addEventListener('click', reset);
+      $('play-again').addEventListener('click', reset);
+
+      state = load();
+      if (state) {
+        if (state.flipped.length === 2) state.flipped = [];
+        render();
+      }
+    </script>
+  </body>
+</html>
