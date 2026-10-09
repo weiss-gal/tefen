@@ -68,7 +68,7 @@ Year folders are Israeli school years (e.g. `2025_2026` = תשפ"ו). Grades: 8t
 
 ## 13. Exercises and projects
 - [FizzBuzz (Kattis)](https://github.com/weiss-gal/tefen/blob/main/2023_2024/10th_grade/excercises/00_fizzbuzz.md) · [screenshot](https://github.com/weiss-gal/tefen/blob/main/2023_2024/10th_grade/excercises/fizzbuzz_screenshot.png)
-- [Password-cracking challenge](https://github.com/weiss-gal/tefen/blob/main/2023_2024/10th_grade/excercises/password_crack.md) · [code](https://github.com/weiss-gal/tefen/blob/main/2023_2024/10th_grade/excercises/password_crack.py)
+- Password-cracking challenge, two variants: [10th grade](https://github.com/weiss-gal/tefen/blob/main/2023_2024/10th_grade/excercises/password_crack.md) · [code](https://github.com/weiss-gal/tefen/blob/main/2023_2024/10th_grade/excercises/password_crack.py) — [8th grade](https://github.com/weiss-gal/tefen/blob/main/2023_2024/8th_grade/excercises/password_crack.md) · [code](https://github.com/weiss-gal/tefen/blob/main/2023_2024/8th_grade/excercises/password_crack.py)
 - [Akinator-style game (v1)](https://github.com/weiss-gal/tefen/blob/main/2023_2024/10th_grade/excercises/akinator_v1.md) – builds on trees/dictionaries
 - [City vote – guided reading of a data site](https://github.com/weiss-gal/tefen/blob/main/2023_2024/10th_grade/excercises/city_vote.md)
 - [Last lesson: practice games and Kattis "hipphipp"](https://github.com/weiss-gal/tefen/blob/main/2023_2024/8th_grade/lessons/05_final/readme.md)
@@ -87,4 +87,3 @@ Year folders are Israeli school years (e.g. `2025_2026` = תשפ"ו). Grades: 8t
 - `netflix_movies.csv`: identical in `2023_2024/10th_grade/04_more_files` and `2023_2024/11th_grade/01_data_analysis`.
 - FizzBuzz: `2023_2024/11th_grade/00_refresh/homework.md` is an earlier-dated copy of the 10th-grade one without the "problems and tips" section.
 - Git exercise `targil1.py`: one identical copy per student folder (avia, geva, naya, noga).
-- Password-cracking challenge: a slightly different variant lives in `2023_2024/8th_grade/excercises`.
